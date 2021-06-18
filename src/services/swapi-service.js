@@ -26,7 +26,7 @@ export default class SwapiService {
         return res.result;
     }
 
-    getPlanets(id) {
+    getPlanet(id) {
         return this.getResource(`/planets/${id}/`)
     }
 
@@ -35,7 +35,7 @@ export default class SwapiService {
         return res.result;
     }
 
-    getStarships(id) {
+    getStarship(id) {
         return this.getResource(`/starships/${id}/`)
     }
 }
