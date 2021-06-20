@@ -66,7 +66,7 @@ export default class PersonDetails extends Component {
     if (!person) {
       return <Spinner />
     }
-   
+
     const personRender = this.renderItems(person);
 
     return (
