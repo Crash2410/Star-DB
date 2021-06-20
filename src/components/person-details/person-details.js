@@ -33,7 +33,7 @@ export default class PersonDetails extends Component {
       })
   }
 
-  renderItems = ({ id, name, gender, birthYear, yeyColor }) => {
+  renderItems = ({ id, name, gender, birth_year, eye_color }) => {
     return (
       <React.Fragment>
         <img className="person-image"
@@ -48,11 +48,11 @@ export default class PersonDetails extends Component {
             </li>
             <li className="list-group-item">
               <span className="term">Birth Year</span>
-              <span>{birthYear}</span>
+              <span>{birth_year}</span>
             </li>
             <li className="list-group-item">
               <span className="term">Eye Color</span>
-              <span>{yeyColor}</span>
+              <span>{eye_color}</span>
             </li>
           </ul>
         </div>
