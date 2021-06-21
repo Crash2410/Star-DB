@@ -1,41 +1,38 @@
 import React, { Component } from 'react';
 
 import ItemList from '../item-list/item-list';
-import PersonDetails from '../person-details/person-details';
+import ItemDetails from '../item-details/item-details';
 import ErrorBoundry from '../errorBoundry/index';
 import Row from '../rows/index';
 
 import './people-page.css';
 import SwapiService from '../../services/swapi-service';
-
-
-
-export default class PeoplePage extends Component {
+export default class PeopleDetails extends Component {
 
   swapiService = new SwapiService();
 
   state = {
-    selectedPerson: 3,
+    selectedItem: 3,
   };
 
-  onPersonSelected = (selectedPerson) => {
-    this.setState({ selectedPerson });
+  onItemSelected = (selectedItem) => {
+    this.setState({ selectedItem });
   };
 
   render() {
     const itemList = (
-      <ItemList onItemSelected={this.onPersonSelected}
+      <ItemList onItemSelected={this.onItemSelected}
         getData={this.swapiService.getAllPeople}
         renderItem={({ name, gender, birth_year }) => `${name} (${gender}, ${birth_year})`} />
     );
 
-    const personDetails = (
-      <PersonDetails personId={this.state.selectedPerson} />
+    const itemDetails = (
+      <ItemDetails itemId={this.state.selectedItem} />
     );
 
     return (
       <ErrorBoundry>
-        <Row left={itemList} right={personDetails} />
+        <Row left={itemList} right={itemDetails} />
       </ErrorBoundry>
     );
   }
