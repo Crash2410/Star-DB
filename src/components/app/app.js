@@ -4,10 +4,17 @@ import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ErrorIndicator from '../error-indicator/error-indicator';
 import ItemDetails, { Record } from '../item-details/item-details';
-import ItemList from '../item-list/item-list';
 import './app.css';
 import SwapiService from '../../services/swapi-service';
 import Row from '../rows/index';
+import {
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails,
+  PersonList,
+  PlanetList,
+  StarshipList
+} from '../sw-components'
 
 export default class App extends React.Component {
 
@@ -60,17 +67,16 @@ export default class App extends React.Component {
     return (
       <div>
         <Header />
+        
         <RandomPlanet />
 
         <Row left={personDetails} right={starshipDetails} />
 
+        <PersonDetails itemId={11} />
 
-        <ItemList
-          getData={getAllPeople}
-          onItemSelected={() => { }}
-        >
+        <StarshipList>
           {({ name }) => <span>{name}</span>}
-        </ItemList>
+        </StarshipList>
       </div>
     );
   }
