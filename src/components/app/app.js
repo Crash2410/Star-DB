@@ -4,6 +4,7 @@ import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ErrorIndicator from '../error-indicator/error-indicator';
 import ItemDetails, { Record } from '../item-details/item-details';
+import ItemList from '../item-list/item-list';
 import './app.css';
 import SwapiService from '../../services/swapi-service';
 import Row from '../rows/index';
@@ -27,7 +28,7 @@ export default class App extends React.Component {
 
   render() {
 
-    const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.swapiService;
+    const { getPerson, getStarship, getPersonImage, getStarshipImage, getAllPeople } = this.swapiService;
 
     if (this.state.hasError) {
       return <ErrorIndicator />
@@ -48,7 +49,7 @@ export default class App extends React.Component {
         itemId={5}
         getData={getStarship}
         getImageUrl={getStarshipImage}>
-          
+
         <Record field="model" label="Model" />
         <Record field="length" label="Length" />
         <Record field="cost_in_credits" label="Cost In Credits" />
@@ -63,6 +64,13 @@ export default class App extends React.Component {
 
         <Row left={personDetails} right={starshipDetails} />
 
+
+        <ItemList
+          getData={getAllPeople}
+          onItemSelected={() => { }}
+        >
+          {({ name }) => <span>{name}</span>}
+        </ItemList>
       </div>
     );
   }
