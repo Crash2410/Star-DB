@@ -67,16 +67,16 @@ export default class App extends React.Component {
     return (
       <div>
         <Header />
-        
+
         <RandomPlanet />
 
         <Row left={personDetails} right={starshipDetails} />
 
         <PersonDetails itemId={11} />
 
-        <StarshipList>
-          {({ name }) => <span>{name}</span>}
-        </StarshipList>
+        <StarshipList />
+        <br />
+        <PersonList />
       </div>
     );
   }
