@@ -3,7 +3,7 @@ import {
     SwapiServiceConsumer
 } from '../swapi-service-contest';
 
-const withSwapiService = (Wrapped, mapMethodsToProps) => {
+const withSwapiService = (mapMethodsToProps) => (Wrapped) => {
     return (props) => {
         return (
             <SwapiServiceConsumer>
