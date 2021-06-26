@@ -7,6 +7,9 @@ import ItemDetails, { Record } from '../item-details/item-details';
 import './app.css';
 import SwapiService from '../../services/swapi-service';
 import Row from '../rows/index';
+
+import { SwapiServiceProvider } from '../swapi-service-contest';
+
 import {
   PersonDetails,
   PlanetDetails,
@@ -66,17 +69,19 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <Header />
+        <SwapiServiceProvider value={this.swapiService}>
+          <Header />
 
-        <RandomPlanet />
+          <RandomPlanet />
 
-        <Row left={personDetails} right={starshipDetails} />
+          <Row left={personDetails} right={starshipDetails} />
 
-        <PersonDetails itemId={11} />
+          <PersonDetails itemId={11} />
 
-        <StarshipList />
-        <br />
-        <PersonList />
+          <StarshipList />
+          <br />
+          <PersonList />
+        </SwapiServiceProvider>
       </div>
     );
   }
