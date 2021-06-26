@@ -6,26 +6,31 @@ import ErrorIndicator from '../error-indicator/error-indicator';
 import ItemDetails, { Record } from '../item-details/item-details';
 import './app.css';
 import SwapiService from '../../services/swapi-service';
+import DummySwapiService from '../../services/dummy-swapi-service';
 import Row from '../rows/index';
 
 import { SwapiServiceProvider } from '../swapi-service-contest';
 
 import {
   PersonDetails,
-  PlanetDetails,
-  StarshipDetails,
   PersonList,
-  PlanetList,
   StarshipList
 } from '../sw-components'
 
 export default class App extends React.Component {
-
-  swapiService = new SwapiService();
-
   state = {
     hasError: false,
-    selectedItem: 3
+    selectedItem: 3,
+    swapiService: new DummySwapiService()
+  };
+
+  onServiceChange = () => {
+    this.setState(({ swapiService }) => {
+      const Service = swapiService instanceof SwapiService ? DummySwapiService : SwapiService;
+      return {
+        swapiService: new Service()
+      }
+    })
   };
 
   componentDidCatch() {
@@ -37,8 +42,7 @@ export default class App extends React.Component {
   };
 
   render() {
-
-    const { getPerson, getStarship, getPersonImage, getStarshipImage, getAllPeople } = this.swapiService;
+    const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.state.swapiService;
 
     if (this.state.hasError) {
       return <ErrorIndicator />
@@ -69,8 +73,8 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <SwapiServiceProvider value={this.swapiService}>
-          <Header />
+        <SwapiServiceProvider value={this.state.swapiService}>
+          <Header onServiceChange={this.onServiceChange} />
 
           <RandomPlanet />
 
