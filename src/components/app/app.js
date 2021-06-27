@@ -45,7 +45,7 @@ export default class App extends React.Component {
         <SwapiServiceProvider value={this.state.swapiService}>
           <Header onServiceChange={this.onServiceChange} />
 
-          <RandomPlanet />
+          <RandomPlanet updateInterval={10000}/>
 
           <PeoplePage />
           <br />
