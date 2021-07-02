@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Header from '../header';
 import RandomPlanet from '../random-planet';
@@ -8,7 +9,6 @@ import SwapiService from '../../services/swapi-service';
 import DummySwapiService from '../../services/dummy-swapi-service';
 
 import { PeoplePage, PlanetPage, StarshipPage } from '../pages';
-
 import { SwapiServiceProvider } from '../swapi-service-contest';
 export default class App extends React.Component {
   state = {
@@ -43,15 +43,13 @@ export default class App extends React.Component {
     return (
       <div>
         <SwapiServiceProvider value={this.state.swapiService}>
-          <Header onServiceChange={this.onServiceChange} />
-
-          <RandomPlanet updateInterval={10000}/>
-
-          <PeoplePage />
-          <br />
-          <PlanetPage/>
-          <br />
-          <StarshipPage/>
+          <Router>
+            <Header onServiceChange={this.onServiceChange} />
+            <RandomPlanet updateInterval={10000} />
+            <Route path='/people' component={PeoplePage}/>
+            <Route path='/planets' component={PlanetPage}/>
+            <Route path='/starships' component={StarshipPage}/>
+          </Router>
         </SwapiServiceProvider>
       </div>
     );
