@@ -46,9 +46,19 @@ export default class App extends React.Component {
           <Router>
             <Header onServiceChange={this.onServiceChange} />
             <RandomPlanet updateInterval={10000} />
-            <Route path='/people' component={PeoplePage}/>
-            <Route path='/planets' component={PlanetPage}/>
-            <Route path='/starships' component={StarshipPage}/>
+            <Route path='/'
+              render={() => {
+                return (<h2>Hello</h2>)
+              }}
+              exact={true} />
+            <Route path='/people'
+              render={() => {
+                return (<h2>People</h2>)
+              }}
+              exact={true} />
+            <Route path='/people' component={PeoplePage} />
+            <Route path='/planets' component={PlanetPage} />
+            <Route path='/starships' component={StarshipPage} />
           </Router>
         </SwapiServiceProvider>
       </div>
