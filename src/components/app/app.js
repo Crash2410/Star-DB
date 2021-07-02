@@ -10,6 +10,7 @@ import DummySwapiService from '../../services/dummy-swapi-service';
 
 import { PeoplePage, PlanetPage, StarshipPage } from '../pages';
 import { SwapiServiceProvider } from '../swapi-service-contest';
+import { StarshipDetails } from '../sw-components';
 export default class App extends React.Component {
   state = {
     hasError: false,
@@ -41,9 +42,10 @@ export default class App extends React.Component {
     }
 
     return (
-      <div>
-        <SwapiServiceProvider value={this.state.swapiService}>
-          <Router>
+      <Router>
+        <div>
+          <SwapiServiceProvider value={this.state.swapiService}>
+
             <Header onServiceChange={this.onServiceChange} />
             <RandomPlanet updateInterval={10000} />
             <Route path='/'
@@ -58,10 +60,19 @@ export default class App extends React.Component {
               exact={true} />
             <Route path='/people' component={PeoplePage} />
             <Route path='/planets' component={PlanetPage} />
-            <Route path='/starships' component={StarshipPage} />
-          </Router>
-        </SwapiServiceProvider>
-      </div>
+            <Route path='/starships'
+              component={StarshipPage}
+              exact
+            />
+            <Route path='/starships/:id'
+              render={({ match, location, history }) => {
+                const { id } = match.params;
+                return <StarshipDetails itemId={id}/>
+              }} />
+
+          </SwapiServiceProvider>
+        </div>
+      </Router>
     );
   }
 };
