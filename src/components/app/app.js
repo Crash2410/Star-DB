@@ -58,7 +58,7 @@ export default class App extends React.Component {
                 return (<h2>People</h2>)
               }}
               exact={true} />
-            <Route path='/people' component={PeoplePage} />
+            <Route path='/people/:id?' component={PeoplePage} />
             <Route path='/planets' component={PlanetPage} />
             <Route path='/starships'
               component={StarshipPage}
