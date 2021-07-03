@@ -8,14 +8,21 @@ import './app.css';
 import SwapiService from '../../services/swapi-service';
 import DummySwapiService from '../../services/dummy-swapi-service';
 
-import { PeoplePage, PlanetPage, StarshipPage } from '../pages';
+import { PeoplePage, PlanetPage, StarshipPage, LoginPage, SecretPage } from '../pages';
 import { SwapiServiceProvider } from '../swapi-service-contest';
 import { StarshipDetails } from '../sw-components';
 export default class App extends React.Component {
   state = {
     hasError: false,
     selectedItem: 3,
-    swapiService: new SwapiService()
+    swapiService: new SwapiService(),
+    isLoggedIn: false
+  };
+
+  onLogin = () => {
+    this.setState({
+      isLoggedIn: true
+    });
   };
 
   onServiceChange = () => {
@@ -36,6 +43,8 @@ export default class App extends React.Component {
   };
 
   render() {
+
+    const { isLoggedIn } = this.state;
 
     if (this.state.hasError) {
       return <ErrorIndicator />
@@ -69,6 +78,21 @@ export default class App extends React.Component {
                 const { id } = match.params;
                 return <StarshipDetails itemId={id} />
               }} />
+            <Route path='/login'
+              render={
+                () => {
+                  return <LoginPage
+                    isLoggedIn={isLoggedIn}
+                    onLogin={this.onLogin} />
+                }
+              }
+            />
+            <Route path='/secret'
+              render={
+                () => {
+                  return <SecretPage isLoggedIn={isLoggedIn} />
+                }
+              } />
           </div>
         </Router>
       </SwapiServiceProvider>
