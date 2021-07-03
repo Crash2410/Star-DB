@@ -42,10 +42,10 @@ export default class App extends React.Component {
     }
 
     return (
-      <Router>
-        <div>
-          <SwapiServiceProvider value={this.state.swapiService}>
 
+      <SwapiServiceProvider value={this.state.swapiService}>
+        <Router>
+          <div className="stardb-app">
             <Header onServiceChange={this.onServiceChange} />
             <RandomPlanet updateInterval={10000} />
             <Route path='/'
@@ -67,12 +67,11 @@ export default class App extends React.Component {
             <Route path='/starships/:id'
               render={({ match, location, history }) => {
                 const { id } = match.params;
-                return <StarshipDetails itemId={id}/>
+                return <StarshipDetails itemId={id} />
               }} />
-
-          </SwapiServiceProvider>
-        </div>
-      </Router>
+          </div>
+        </Router>
+      </SwapiServiceProvider>
     );
   }
 };
